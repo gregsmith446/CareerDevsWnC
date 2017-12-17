@@ -14,19 +14,19 @@ var todolist = {
         // else
         // print todos as normal
         if (this.todos.length === 0) {
-            console.log("your todo list is empty");
+            console.log("your todo list is empty!");
         }
         else {
-            console.log("My list of todos:");
+            // console.log("My list of todos:");
             for (var i = 0; i < this.todos.length; i++) {
                 //check is .completed is true
                 if (this.todos[i].completed === true) {
                     //print with (x)
-                    console.log("(x)", "this.todos[i].todoText");
+                    console.log("(x)");
                 }
                 else {
                     //print with ( )
-                    console.log("( )", "this.todos[i].todoText");
+                    console.log("( )");
                 }
             }
         }
@@ -77,3 +77,17 @@ var todolist = {
         this.displayTodos();
     }
 };
+
+// 1. we want to get access to the displays todos button
+var displayTodosButton = document.getElementById("displayTodosButton");
+var toggleAllButton = document.getElementById("toggleAllButton");
+// console.log(displayTodosButton);
+// 2. we want to run the displayTodos method, when someone clicks the display todos button
+// addEventListener is a method - when item is clicked, run this function
+displayTodosButton.addEventListener("click", function() {
+    todolist.displayTodos();
+});
+
+toggleAllButton.addEventListener("click", function() {
+    todolist.toggleAll();
+});
