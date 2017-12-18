@@ -1,18 +1,4 @@
-// var myComputer = { // example of an object that stores information
-//     operatingSystem: "mac",
-//     screenSize: "15 inches",
-//     purchaseYear: 2011
-// };
-
-// var Greg = { //example of an object that stores info plus methods aka functions
-//     name: "Greg",
-//     sayName: function() { //method - a property (sayName) is equal to a function
-//         // console.log(this); //will print out the whole object
-//         console.log(this.name);
-//     }
-// };
-
-//GOALS OF VERSION 3 - OBJECTS
+//GOALS OF VERSION 3 - OBJECTS - object of text
 // STORES the todos array on an object
 // has a DISPLAY todos method
 // has an ADD todos method

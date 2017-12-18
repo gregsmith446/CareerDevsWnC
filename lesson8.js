@@ -1,5 +1,4 @@
-// Lesson 6 Thinking in Code
-// .toggle All
+//lesson 8 - REFACTORING
 
 var todolist = {
     todos: [],
@@ -78,16 +77,30 @@ var todolist = {
     }
 };
 
-// 1. we want to get access to the displays todos button
-var displayTodosButton = document.getElementById("displayTodosButton");
-var toggleAllButton = document.getElementById("toggleAllButton");
-// console.log(displayTodosButton);
-// 2. we want to run the displayTodos method, when someone clicks the display todos button
-// addEventListener is a method - when item is clicked, run this function
-displayTodosButton.addEventListener("click", function() {
-    todolist.displayTodos();
-});
+//refactored HTML DOM section with use of onclick=""
+//going to use a new object that will "handle" these tasks
 
-toggleAllButton.addEventListener("click", function() {
-    todolist.toggleAll();
-});
+var handlers = {
+    displayTodos: function() {
+        todolist.displayTodos();
+    },
+    toggleAll: function() {
+        todolist.toggleAll();
+    }
+}
+
+
+
+// // 1. we want to get access to the displays todos button
+// var displayTodosButton = document.getElementById("displayTodosButton");
+// var toggleAllButton = document.getElementById("toggleAllButton");
+// // console.log(displayTodosButton);
+// // 2. we want to run the displayTodos method, when someone clicks the display todos button
+// // addEventListener is a method - when item is clicked, run this function
+// displayTodosButton.addEventListener("click", function() {
+//     todolist.displayTodos();
+// });
+
+// toggleAllButton.addEventListener("click", function() {
+//     todolist.toggleAll();
+// });
