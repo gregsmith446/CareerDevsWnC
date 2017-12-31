@@ -1,11 +1,17 @@
 //lesson 8 - REFACTORING
+// working controls for .addTodo
+// working controls for .changeTodo
+// working controls for .deleteTodo
+// working controls for .toggleCompleted
+//PAGE will have INPUTS
 
+//todolist object
 var todolist = {
     todos: [],
     displayTodos: function() {
         console.log("My Todos:");
         for (var i = 0; i < this.todos.length; i++) {
-            console.log(this.todos[i].todoText); //will log the text of the todoarray in the console
+            // console.log(this.todos[i].todoText); //will log the text of the todoarray in the console
         }
         // if there are no todos aka if this.todos.length is equal to 0
         // if this.todos.length === 0, abbreivated version of text above meaning, if the array is empty, do this...
@@ -84,23 +90,29 @@ var handlers = {
     displayTodos: function() {
         todolist.displayTodos();
     },
+    addTodo: function() {
+        var addTodoTextInput = document.getElementById("addTodoTextInput");
+        todolist.addTodo(addTodoTextInput.value);
+        addTodoTextInput.value = '';
+    },
+    changeTodo: function() {
+        var changeTodoPositionInput = document.getElementById("changeTodoPositionInput");
+        var changeTodoTextInput = document.getElementById("changeTodoTextInput");
+        todolist.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
+        changeTodoPositionInput.value = '';
+        changeTodoTextInput = '';
+    },
+    deleteTodo: function() {
+        var deleteTodoPositionInput = document.getElementById("deleteTodoPositionInput");
+        todolist.deleteTodo(deleteTodoPositionInput.valueasNumber);
+        deleteTodoPositionInput.value = "";
+    },
+    toggleCompleted: function() {
+        var toggleCompletedPositionInput = document.getElementById("toggleCompletedPositionInput");
+        todolist.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
+        toggleCompletedPositionInput.value = "";
+    },
     toggleAll: function() {
         todolist.toggleAll();
     }
-}
-
-
-
-// // 1. we want to get access to the displays todos button
-// var displayTodosButton = document.getElementById("displayTodosButton");
-// var toggleAllButton = document.getElementById("toggleAllButton");
-// // console.log(displayTodosButton);
-// // 2. we want to run the displayTodos method, when someone clicks the display todos button
-// // addEventListener is a method - when item is clicked, run this function
-// displayTodosButton.addEventListener("click", function() {
-//     todolist.displayTodos();
-// });
-
-// toggleAllButton.addEventListener("click", function() {
-//     todolist.toggleAll();
-// });
+};
