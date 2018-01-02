@@ -1,60 +1,21 @@
-//lesson 8 - REFACTORING
-// working controls for .addTodo
-// working controls for .changeTodo
-// working controls for .deleteTodo
-// working controls for .toggleCompleted
-//PAGE will have INPUTS
-
-//todolist object
+//todolist object holds the data and sets up the buttons
 var todolist = {
     todos: [],
-    displayTodos: function() {
-        console.log("My Todos:");
-        for (var i = 0; i < this.todos.length; i++) {
-            // console.log(this.todos[i].todoText); //will log the text of the todoarray in the console
-        }
-        // if there are no todos aka if this.todos.length is equal to 0
-        // if this.todos.length === 0, abbreivated version of text above meaning, if the array is empty, do this...
-        // console.log ("your todo list is empty")
-        // else
-        // print todos as normal
-        if (this.todos.length === 0) {
-            console.log("your todo list is empty!");
-        }
-        else {
-            // console.log("My list of todos:");
-            for (var i = 0; i < this.todos.length; i++) {
-                //check is .completed is true
-                if (this.todos[i].completed === true) {
-                    //print with (x)
-                    console.log("(x)", this.todos[i].todoText);
-                }
-                else {
-                    //print with ( )
-                    console.log("( )", this.todos[i].todoText);
-                }
-            }
-        }
-    },
     addTodo: function(todoText) {
         this.todos.push({
             todoText: todoText,
             completed: false
         });
-        this.displayTodos();
     },
     changeTodo: function(position, todoText) {
         this.todos[position].todoText = todoText;
-        this.displayTodos();
     },
     deleteTodo: function(position) {
         this.todos.splice(position, 1);
-        this.displayTodos();
     },
     toggleCompleted: function(position) {
         var todo = this.todos[position];
         todo.completed = !todo.completed;
-        this.displayTodos();
     },
     toggleAll: function() {
         var totalTodos = this.todos.length;
@@ -79,21 +40,16 @@ var todolist = {
             }
 
         }
-        this.displayTodos();
     }
 };
 
-//refactored HTML DOM section with use of onclick=""
-//going to use a new object that will "handle" these tasks
-
+//handles the user interactions
 var handlers = {
-    displayTodos: function() {
-        todolist.displayTodos();
-    },
     addTodo: function() {
         var addTodoTextInput = document.getElementById("addTodoTextInput");
         todolist.addTodo(addTodoTextInput.value);
         addTodoTextInput.value = '';
+        view.displayTodos();
     },
     changeTodo: function() {
         var changeTodoPositionInput = document.getElementById("changeTodoPositionInput");
@@ -101,30 +57,62 @@ var handlers = {
         todolist.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
         changeTodoPositionInput.value = '';
         changeTodoTextInput = '';
+        view.displayTodos();
+
     },
     deleteTodo: function() {
         var deleteTodoPositionInput = document.getElementById("deleteTodoPositionInput");
         todolist.deleteTodo(deleteTodoPositionInput.valueasNumber);
         deleteTodoPositionInput.value = "";
+        view.displayTodos();
+
     },
     toggleCompleted: function() {
         var toggleCompletedPositionInput = document.getElementById("toggleCompletedPositionInput");
         todolist.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
         toggleCompletedPositionInput.value = "";
+        view.displayTodos();
+
     },
     toggleAll: function() {
         todolist.toggleAll();
+        view.displayTodos();
     }
 };
 
-//takes the array and displays it on our screen
+//this method takes the array and displays it on our screen
 var view = {
     displayTodos: function() {
         var todosUl = document.querySelector("ul");
         todosUl.innerHTML = "";
         for (var i = 0; i < todolist.todos.length; i++) {
             var todoLi = document.createElement("li");
+            var todo = todolist.todos[i];
+            var todoTextWithCompletion
+
+            if (todo.completed === true) {
+                todoTextWithCompletion = "(x)" + todo.todoText;
+            }
+            else {
+                todoTextWithCompletion = "( )" + todo.todoText;
+            }
+            todoLi.id = i;
+            todoLi.textContent = todoTextWithCompletion;
+            todoLi.appendChild(this.createDeleteButton());
             todosUl.appendChild(todoLi);
         }
+    },
+    createDeleteButton: function() {
+        var deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "deleteButton";
+        return deleteButton;
     }
 };
+
+var todosUl = document.querySelector("ul");
+
+todosUl.addEventListener("click", function(event) {
+    console.log(event.target.parentNode.id);
+    
+});
